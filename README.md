@@ -32,7 +32,8 @@ This repository contains the implementation and deliverables for the **Car Deale
 ### **Milestone 4: Testing and Deployment**
 - **Description**: Contains the test cases, defect reports, and automated test scripts used to verify the system's functionality.
 - **Files**:
-  - `testcases.xlsx`: A spreadsheet with all the manual test cases and defect reports.
+  - `testcases.xlsx`: A spreadsheet with all the manual test cases.
+  - `Defect.xlsx`: A spreadsheet will all the defects.
   - `test_cases.robot`: A Robot Framework file automating three critical test cases for the system.
 
 ---
@@ -63,15 +64,14 @@ To run the project locally, you will need:
 
 3. **Download All Files**
    - Ensure you download the following files from the `Source_Code/` directory:
-     - `index.html`: The main HTML file for the web application.
-     - Supporting files, such as:
-       - `styles.css` (CSS file for styling)
-       - `script.js` (JavaScript file for client-side interactivity)
-       - Any additional files (e.g., images, configuration files) required for the webpage to function properly.
+     - `templates/`: The HTML files for the web application.
+     - 'static/': The css and js files
+     - 'app.py': Serves as the main application logic for handling routes, connecting to the database, and defining the backend functionality of the website.
+     - 'db_config.py': Database connection
 
 4. **Open the Webpage**
-   - After downloading all the files, locate the `index.html` file on your local machine.
-   - Double-click the `index.html` file, or right-click it and choose "Open With" > Your preferred web browser.
+   - After downloading all the files, locate the `app.py` file on your local machine.
+   - Run the app.py file and choose your preferred browser
 
 5. **Interact with the Webpage**
    - The homepage of the Car Dealership System will load in your browser.
