@@ -1,0 +1,137 @@
+Project Title: Functional Website for a Car Dealership System
+
+Overview:
+I want to build a fully functional website for a car dealership system that integrates with a database managed in Microsoft SQL Server Management Studio. The website should have distinct user roles: Admin, Salesperson, and Customer, each with specific functionalities.
+
+Core Requirements:
+
+Login/Signup Page:
+
+Allow users to register and log in securely.
+Differentiate between Admin, Salesperson, and Customer roles upon login.
+Role-Based Functionalities:
+
+Customer:
+Book a car.
+Book a test drive.
+Salesperson:
+Book a car or test drive on behalf of a customer.
+View all bookings and test drives.
+Admin:
+Manage car maintenance (add, update, or delete records).
+View sales reports (generated from the database).
+Database Schema:
+I’ve already designed the database schema with the following tables:
+
+Customer, SalesPerson, Admin, Car, Report, Maintenance, Booking, TestDrive, Sales, Notification.
+(See detailed schema below.)
+Technical Details:
+
+Frontend: Open to suggestions for the framework (e.g., React, Angular, or plain HTML/CSS/JavaScript).
+Backend: Could use a server-side language like Python (Django/Flask), Node.js, or ASP.NET.
+Database: Microsoft SQL Server.
+Additional Features:
+
+Responsive design for mobile and desktop.
+Secure password storage and authentication (e.g., hashing passwords).
+Notification system for customers (e.g., test drive reminders or booking confirmations).
+Database Schema:
+The schema includes tables for managing users, cars, bookings, test drives, maintenance, sales, reports, and notifications.
+
+-- Customer Table
+CREATE TABLE Customer (
+    CustomerID NUMBER PRIMARY KEY,
+    Name VARCHAR2(100) NOT NULL,
+    Address VARCHAR2(255),
+    PhoneNumber VARCHAR2(15),
+    Email VARCHAR2(100) NOT NULL UNIQUE,
+    Password VARCHAR2(100) NOT NULL
+);
+
+-- SalesPerson Table
+CREATE TABLE SalesPerson (
+    SalesPersonID NUMBER PRIMARY KEY,
+    Name VARCHAR2(100) NOT NULL,
+    Department VARCHAR2(100),
+    PhoneNumber VARCHAR2(15),
+    Email VARCHAR2(100) NOT NULL UNIQUE,
+    Password VARCHAR2(100) NOT NULL
+);
+
+-- Admin Table
+CREATE TABLE Admin (
+    AdminID NUMBER PRIMARY KEY,
+    Name VARCHAR2(100) NOT NULL,
+    PhoneNumber VARCHAR2(15),
+    Email VARCHAR2(100) NOT NULL UNIQUE,
+    Password VARCHAR2(100) NOT NULL
+);
+
+-- Car Table
+CREATE TABLE Car (
+    CarID NUMBER PRIMARY KEY,
+    Make VARCHAR2(100) NOT NULL,
+    Model VARCHAR2(100) NOT NULL,
+    Year NUMBER NOT NULL,
+    Price NUMBER NOT NULL,
+    Specifications VARCHAR2(255),
+    Status VARCHAR2(50),
+    ImageURL VARCHAR2(255)
+);
+
+-- Report Table
+CREATE TABLE Report (
+    ReportID NUMBER PRIMARY KEY,
+    AdminID NUMBER REFERENCES Admin(AdminID),
+    ReportType VARCHAR2(50),
+    DateGenerated DATE,
+    FileURL VARCHAR2(255)
+);
+
+-- Maintenance Table
+CREATE TABLE Maintenance (
+    MaintenanceID NUMBER PRIMARY KEY,
+    CarID NUMBER REFERENCES Car(CarID),
+    MaintenanceDate DATE NOT NULL,
+    Description VARCHAR2(255),
+    MaintenanceStatus VARCHAR2(50)
+);
+
+-- Booking Table
+CREATE TABLE Booking (
+    BookingID NUMBER PRIMARY KEY,
+    BookingType VARCHAR2(50),
+    BookingDate DATE,
+    ExpirationDate DATE,
+    BookingStatus VARCHAR2(50),
+    CustomerID NUMBER REFERENCES Customer(CustomerID),
+    CarID NUMBER REFERENCES Car(CarID)
+);
+
+-- TestDrive Table
+CREATE TABLE TestDrive (
+    TestDriveID NUMBER PRIMARY KEY,
+    BookingID NUMBER REFERENCES Booking(BookingID),
+    TestDriveDate DATE,
+    Feedback VARCHAR2(255)
+);
+
+-- Sales Table
+CREATE TABLE Sales (
+    SaleID NUMBER PRIMARY KEY,
+    CarID NUMBER REFERENCES Car(CarID),
+    CustomerID NUMBER REFERENCES Customer(CustomerID),
+    SaleDate DATE,
+    TotalPrice NUMBER NOT NULL,
+    InvoiceURL VARCHAR2(255)
+);
+
+-- Notification Table
+CREATE TABLE Notification (
+    NotificationID NUMBER PRIMARY KEY,
+    CustomerID NUMBER REFERENCES Customer(CustomerID),
+    Message VARCHAR2(255),
+    NotificationType VARCHAR2(50),
+    NotificationDate DATE,
+    ReadStatus VARCHAR2(50)
+);
