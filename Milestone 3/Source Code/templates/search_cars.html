@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Search Cars</title>
+    <link rel="stylesheet" href="/static/styles.css">
+</head>
+<body>
+    <div class="container">
+        <h1>Search Cars</h1>
+        <form method="POST" action="/customer/search_cars">
+            <label for="min_price">Minimum Price:</label>
+            <input type="number" name="min_price" id="min_price" required>
+            
+            <label for="max_price">Maximum Price:</label>
+            <input type="number" name="max_price" id="max_price" required>
+            
+            <button type="submit" class="action-button">Search</button>
+        </form>
+        <h2>Results:</h2>
+        {% if cars %}
+            <table>
+                <thead>
+                    <tr>
+                        <th>Car ID</th>
+                        <th>Model</th>
+                        <th>Make</th>
+                        <th>Price</th>
+                        <th>Availability</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for car in cars %}
+                        <tr>
+                            <td>{{ car[0] }}</td>
+                            <td>{{ car[1] }}</td>
+                            <td>{{ car[2] }}</td>
+                            <td>${{ car[3] }}</td>
+                            <td>{{ 'Yes' if car[4] else 'No' }}</td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        {% else %}
+            <p>No cars found in the specified price range.</p>
+        {% endif %}
+        <a href="/dashboard/customer" class="action-button">Back to Dashboard</a>
+    </div>
+</body>
+</html>

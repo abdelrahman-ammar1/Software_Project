@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Book a Car for a Customer</title>
+    <link rel="stylesheet" href="/static/styles.css">
+</head>
+<body>
+    <h1>Book a Car for a Customer</h1>
+    <form method="POST" action="/salesperson/book_car">
+        <label for="customer_id">Select Customer:</label>
+        <select name="customer_id" id="customer_id" required>
+            {% for customer in customers %}
+                <option value="{{ customer[0] }}">{{ customer[1] }}</option>
+            {% endfor %}
+        </select>
+        <br>
+        <label for="car_id">Select Car:</label>
+        <select name="car_id" id="car_id" required>
+            {% for car in cars %}
+                <option value="{{ car[0] }}">{{ car[1] }} {{ car[2] }}</option>
+            {% endfor %}
+        </select>
+        <br>
+        <button type="submit">Book Car</button>
+    </form>
+    <a href="/dashboard/salesperson">Back to Dashboard</a>
+</body>
+</html>

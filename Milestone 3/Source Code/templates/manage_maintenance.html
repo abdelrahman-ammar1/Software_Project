@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Manage Maintenance</title>
+    <link rel="stylesheet" href="/static/styles.css">
+</head>
+<body>
+    <h1>Manage Maintenance</h1>
+    <form method="POST" action="/admin/manage_maintenance">
+        <h2>Add Maintenance Record</h2>
+        <label for="car_id">Select Car:</label>
+        <select name="car_id" required>
+            {% for car in cars %}
+                <option value="{{ car[0] }}">{{ car[1] }} {{ car[2] }}</option>
+            {% endfor %}
+        </select>
+        <label for="issue">Issue:</label>
+        <input type="text" name="issue" required>
+        <label for="cost">Cost:</label>
+        <input type="number" name="cost" step="0.01" required>
+        <button type="submit">Add Record</button>
+    </form>
+    <h2>Maintenance Records</h2>
+    <table border="1">
+        <thead>
+            <tr>
+                <th>Maintenance ID</th>
+                <th>Car</th>
+                <th>Issue</th>
+                <th>Date</th>
+                <th>Cost</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for record in maintenance %}
+                <tr>
+                    <td>{{ record[0] }}</td>
+                    <td>{{ record[1] }} {{ record[2] }}</td>
+                    <td>{{ record[3] }}</td>
+                    <td>{{ record[4] }}</td>
+                    <td>${{ record[5] }}</td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    <a href="/dashboard/admin">Back to Dashboard</a>
+</body>
+</html>

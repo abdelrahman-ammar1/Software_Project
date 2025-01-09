@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Book a Car</title>
+    <link rel="stylesheet" href="/static/styles.css">
+</head>
+<body>
+    <h1>Available Cars</h1>
+    <form method="POST" action="/book_car">
+        <ul>
+            {% for car in cars %}
+                <li>
+                    {{ car[1] }} {{ car[2] }} - ${{ car[3] }}
+                    <button type="submit" name="car_id" value="{{ car[0] }}">Book</button>
+                </li>
+            {% endfor %}
+        </ul>
+    </form>
+    <a href="/dashboard/customer">Back to Dashboard</a>
+</body>
+</html>

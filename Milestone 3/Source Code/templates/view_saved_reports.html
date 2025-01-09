@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Saved Reports</title>
+    <link rel="stylesheet" href="/static/styles.css">
+</head>
+<body>
+    <div class="container">
+        <h1>Saved Reports</h1>
+        <table>
+            <thead>
+                <tr>
+                    <th>Report Name</th>
+                    <th>Created Date</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for report in reports %}
+                    <tr>
+                        <td>{{ report[1] }}</td>
+                        <td>{{ report[2] }}</td>
+                        <td><a href="/admin/view_report/{{ report[0] }}" class="action-button">View</a></td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+        <a href="/dashboard/admin" class="action-button">Back to Dashboard</a>
+    </div>
+</body>
+</html>

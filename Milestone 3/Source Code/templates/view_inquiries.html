@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>View Inquiries</title>
+    <link rel="stylesheet" href="/static/styles.css">
+</head>
+<body>
+    <div class="container">
+        <h1>Customer Inquiries</h1>
+        <table>
+            <thead>
+                <tr>
+                    <th>Inquiry ID</th>
+                    <th>Customer</th>
+                    <th>Inquiry</th>
+                    <th>Timestamp</th>
+                    <th>Status</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for inquiry in inquiries %}
+                    <tr>
+                        <td>{{ inquiry[0] }}</td>
+                        <td>{{ inquiry[1] }}</td>
+                        <td>{{ inquiry[2] }}</td>
+                        <td>{{ inquiry[3] }}</td>
+                        <td>{{ inquiry[4] }}</td>
+                        <td>
+                            <form method="POST" action="/salesperson/view_inquiries">
+                                <input type="hidden" name="inquiry_id" value="{{ inquiry[0] }}">
+                                <select name="status" required>
+                                    <option value="" disabled selected>Change Status</option>
+                                    <option value="Pending">Pending</option>
+                                    <option value="Resolved">Resolved</option>
+                                    <option value="Closed">Closed</option>
+                                </select>
+                                <button type="submit" class="action-button">Update</button>
+                            </form>
+                        </td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+        <a href="/dashboard/salesperson" class="action-button">Back to Dashboard</a>
+    </div>
+</body>
+</html>

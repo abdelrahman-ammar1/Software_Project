@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Book a Test Drive</title>
+    <link rel="stylesheet" href="/static/styles.css">
+</head>
+<body>
+    <div class="container">
+        <h1>Book a Test Drive</h1>
+        <form method="POST" action="/book_testdrive">
+            <label for="car_id">Select a Car:</label>
+            <select name="car_id" id="car_id" required>
+                {% for car in cars %}
+                    <option value="{{ car[0] }}">{{ car[1] }} - {{ car[2] }}</option>
+                {% endfor %}
+            </select>
+            <label for="test_drive_date">Choose a Date:</label>
+            <input type="date" name="test_drive_date" id="test_drive_date" required>
+            <button type="submit">Book Test Drive</button>
+        </form>
+        <a href="/dashboard/customer" class="action-button">Back to Dashboard</a>
+    </div>
+</body>
+</html>

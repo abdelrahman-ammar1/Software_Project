@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Manage Cars</title>
+    <link rel="stylesheet" href="/static/styles.css">
+</head>
+<body>
+    <h1>Manage Cars</h1>
+    <form method="POST" action="/admin/manage_cars">
+        <h2>Add a Car</h2>
+        <input type="hidden" name="action" value="add">
+        <label for="model">Model:</label>
+        <input type="text" name="model" required>
+        <label for="make">Make:</label>
+        <input type="text" name="make" required>
+        <label for="price">Price:</label>
+        <input type="number" name="price" step="0.01" required>
+        <button type="submit">Add Car</button>
+    </form>
+    <h2>Existing Cars</h2>
+    <table border="1">
+        <thead>
+            <tr>
+                <th>Car ID</th>
+                <th>Model</th>
+                <th>Make</th>
+                <th>Price</th>
+                <th>Availability</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for car in cars %}
+                <tr>
+                    <form method="POST" action="/admin/manage_cars">
+                        <td>{{ car[0] }}</td>
+                        <td><input type="text" name="model" value="{{ car[1] }}" required></td>
+                        <td><input type="text" name="make" value="{{ car[2] }}" required></td>
+                        <td><input type="number" name="price" step="0.01" value="{{ car[3] }}" required></td>
+                        <td>{{ 'Yes' if car[4] else 'No' }}</td>
+                        <td>
+                            <input type="hidden" name="car_id" value="{{ car[0] }}">
+                            <button type="submit" name="action" value="update">Update</button>
+                            <button type="submit" name="action" value="delete">Delete</button>
+                        </td>
+                    </form>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    <a href="/dashboard/admin">Back to Dashboard</a>
+</body>
+</html>

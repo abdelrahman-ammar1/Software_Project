@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Notifications</title>
+    <link rel="stylesheet" href="/static/styles.css">
+</head>
+<body>
+    <div class="container">
+        <h1>Notifications</h1>
+        <ul>
+            {% for notification in notifications %}
+                <li>
+                    <strong>{{ notification[1] }}</strong>
+                    <br>
+                    <small>{{ notification[2] }}</small>
+                </li>
+            {% endfor %}
+        </ul>
+        <a href="/dashboard/customer" class="action-button">Back to Dashboard</a>
+    </div>
+</body>
+</html>

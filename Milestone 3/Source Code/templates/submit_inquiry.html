@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Submit Inquiry</title>
+    <link rel="stylesheet" href="/static/styles.css">
+</head>
+<body>
+    <div class="container">
+        <h1>Submit an Inquiry</h1>
+        <form method="POST" action="/customer/submit_inquiry">
+            <label for="inquiry_text">Your Inquiry:</label>
+            <textarea name="inquiry_text" id="inquiry_text" rows="5" required></textarea>
+            <button type="submit" class="action-button">Submit</button>
+        </form>
+        <a href="/dashboard/customer" class="action-button">Back to Dashboard</a>
+    </div>
+</body>
+</html>
